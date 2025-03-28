@@ -7,7 +7,7 @@ function ToDoItem() {
         </div>
         <div className="col-4">14-01-2025</div>
         <div className="col-2">
-          <button type="button" className="btn btn-danger">
+          <button type="button" className="btn btn-danger hg_button">
             DELETE
           </button>
         </div>

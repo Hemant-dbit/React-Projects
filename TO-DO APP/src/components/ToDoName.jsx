@@ -11,7 +11,7 @@ function ToDoName() {
           </div>
 
           <div class="col-2">
-            <button type="button" class="btn btn-success">
+            <button type="button" class="btn btn-success hg_button">
               ADD
             </button>
           </div>
