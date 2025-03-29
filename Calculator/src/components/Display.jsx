@@ -1,8 +1,13 @@
 import styles from "./Display.module.css";
-function Display() {
+function Display({ displayVal }) {
   return (
     <div>
-      <input type="text" className={styles.display} />
+      <input
+        type="text"
+        className={styles.display}
+        value={displayVal}
+        readOnly
+      />
     </div>
   );
 }
