@@ -1,0 +1,17 @@
+.buttonContainer {
+  display: flex; /* Enable flexbox */
+  flex-wrap: wrap;
+  gap: 5px; /* Adds spacing between buttons */
+  justify-content: center; /* Centers the buttons */
+  max-width: 200px; /* Limits container width */
+}
+
+.button {
+  border: 1px solid grey;
+  width: 50px; /* Increased button size */
+  height: 50px; /* Make buttons square */
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  margin: 5px;
+}
