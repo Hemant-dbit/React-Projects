@@ -1,21 +1,31 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { MdOutlineAddComment } from "react-icons/md";
 
 function ToDoName({ onNewItem }) {
-  const [todoName, setTodoName] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  const todoNameElement = useRef(null);
+  const dueDateElement = useRef(null);
 
   const handleAddButtonClicked = () => {
+    const todoName = todoNameElement.current.value;
+    const dueDate = dueDateElement.current.value;
+    if (todoName === "") {
+      alert("Please enter a todo name.");
+      return;
+    }
+    if (dueDate === "") {
+      alert("Please enter a due date.");
+      return;
+    }
+    if (new Date(dueDate) < new Date()) {
+      alert("Due date cannot be in the past.");
+      return;
+    }
+    todoNameElement.current.value = "";
+    dueDateElement.current.value = "";
     onNewItem(todoName, dueDate);
-    setTodoName("");
-    setDueDate("");
+    
   };
-  const handleNameChange = (event) => {
-    setTodoName(event.target.value);
-  };
-  const handleDateChange = (event) => {
-    setDueDate(event.target.value);
-  };
+  
 
   return (
     <div className="ToDoContainer">
@@ -24,13 +34,13 @@ function ToDoName({ onNewItem }) {
           <div className="col-6">
             <input
               type="text"
+              ref = {todoNameElement}
               placeholder="Enter the todo here"
-              value={todoName}
-              onChange={handleNameChange}
+              
             />
           </div>
           <div className="col-4">
-            <input type="date" value={dueDate} onChange={handleDateChange} />
+            <input type="date" ref={dueDateElement}   />
           </div>
 
           <div className="col-2">
