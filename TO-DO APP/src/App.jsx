@@ -4,6 +4,7 @@ import ToDoItem from "./components/ToDoItem";
 import TodoItems from "./components/ToDoItems";
 import "./App.css";
 import { useState } from "react";
+import WelcomeMessage from "./components/WelcomeMessage";
 
 function App() {
   const [todoItems , setTodoItems] = useState([]);
@@ -27,6 +28,7 @@ function App() {
     <div className="to-do container">
       <AppName></AppName>
       <ToDoName onNewItem={handleNewItem}></ToDoName>
+      {todoItems.length === 0 && <WelcomeMessage></WelcomeMessage>}
       <TodoItems
         todoItems={todoItems}
         onDeleteClick={handleDeleteItem}
