@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdOutlineAddComment } from "react-icons/md";
 
-function ToDoName({onNewItem}) {
+function ToDoName({ onNewItem }) {
   const [todoName, setTodoName] = useState("");
   const [dueDate, setDueDate] = useState("");
 
@@ -29,8 +29,8 @@ function ToDoName({onNewItem}) {
               onChange={handleNameChange}
             />
           </div>
-          <div className="col-4" value={dueDate} onChange={handleDateChange}>
-            <input type="date" />
+          <div className="col-4">
+            <input type="date" value={dueDate} onChange={handleDateChange} />
           </div>
 
           <div className="col-2">
@@ -39,7 +39,7 @@ function ToDoName({onNewItem}) {
               className="btn btn-success hg_button"
               onClick={handleAddButtonClicked}
             >
-             <MdOutlineAddComment />
+              <MdOutlineAddComment />
             </button>
           </div>
         </div>
