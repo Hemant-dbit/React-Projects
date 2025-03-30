@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MdOutlineAddComment } from "react-icons/md";
 
 function ToDoName({onNewItem}) {
   const [todoName, setTodoName] = useState("");
@@ -38,7 +39,7 @@ function ToDoName({onNewItem}) {
               className="btn btn-success hg_button"
               onClick={handleAddButtonClicked}
             >
-              ADD
+             <MdOutlineAddComment />
             </button>
           </div>
         </div>
