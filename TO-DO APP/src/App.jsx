@@ -3,39 +3,54 @@ import ToDoName from "./components/ToDoName";
 import ToDoItem from "./components/ToDoItem";
 import TodoItems from "./components/ToDoItems";
 import "./App.css";
-import { useState } from "react";
+import { useReducer } from "react";
 import WelcomeMessage from "./components/WelcomeMessage";
 
-function App() {
-  const [todoItems , setTodoItems] = useState([]);
-
-  const handleNewItem = (itemName, itemDueDate) => {
-    console.log(`New Item Added: ${itemName} Date:${itemDueDate}`);
+const todoItemsReducer = (currToDoItem, action) => {
+  let newTodoItems = [...currToDoItem];
+  if (action.type === "NEW_ITEM") {
     const newTodoItems = [
-      ...todoItems,
-      { name: itemName, dueDate: itemDueDate },
+      ...currToDoItem,
+      { name: action.payload.itemName, dueDate: action.payload.itemDueDate },
     ];
-    setTodoItems(newTodoItems);
+    return newTodoItems;
+  }else if (action.type === "DELETE_ITEM") {
+    newTodoItems = currToDoItem.filter(
+      (item) => item.name !== action.payload.itemName
+    );
+    return newTodoItems;
+  }
+  
+};
+
+function App() {
+  // const [todoItems , setTodoItems] = useState([]);
+  const [todoItems, dispatchToDoItems] = useReducer(todoItemsReducer, []);
+
+  const addNewItem = (itemName, itemDueDate) => {
+    const newItemAction = {
+      type: "NEW_ITEM",
+      payload: { itemName: itemName, itemDueDate: itemDueDate },
+    };
+    dispatchToDoItems(newItemAction);
   };
 
-  const handleDeleteItem = (todoItemName) => {
-    const newTodoItems = todoItems.filter((item) => item.name !== todoItemName);
-    setTodoItems(newTodoItems);
+  const deleteItem = (todoItemName) => {
+    const deleteItemAction = {
+      type: "DELETE_ITEM",
+      payload: { itemName: todoItemName },
+    };
+    dispatchToDoItems(deleteItemAction);
   };
-
 
   return (
     <div className="to-do container">
       <AppName></AppName>
-      <ToDoName onNewItem={handleNewItem}></ToDoName>
+      <ToDoName onNewItem={addNewItem}></ToDoName>
       {todoItems.length === 0 && <WelcomeMessage></WelcomeMessage>}
-      <TodoItems
-        todoItems={todoItems}
-        onDeleteClick={handleDeleteItem}
-      ></TodoItems>
+      <TodoItems todoItems={todoItems} onDeleteClick={deleteItem}></TodoItems>
     </div>
   );
 }
 
 export default App;
-
