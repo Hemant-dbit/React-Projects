@@ -22,3 +22,9 @@
   padding: 2px 2px;
   margin: 2px 2px;
 }
+
+.create-post-form{
+  margin: 10px 10px;
+  width: 60%;
+  margin-left : 60px;
+}

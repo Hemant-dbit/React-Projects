@@ -20,7 +20,21 @@ const PostListProvider = ({ children }) => {
 
   const [postList , dispatchPostList] = useReducer(postListReducer, DEFAULT_POST_LIST);
 
-  const addPost = () => {
+  const addPost = ({userId, postTitle, postBody, tags}) => {
+    const postId = Math.random().toString(36).substring(2, 9);
+    const newPost = {
+      id: postId,
+      title: postTitle,
+      body: postBody,
+      userId: userId,
+      reactions: {
+        like: 0,
+        love: 0,
+        haha: 0,
+      },
+      tags: tags,
+    };
+    dispatchPostList({ type: "ADD_POST", payload: newPost });
 
   }
 
@@ -36,32 +50,7 @@ const PostListProvider = ({ children }) => {
 }
 
 const DEFAULT_POST_LIST = [
-  {
-    id : "1",
-    title : "My First Post",
-    body : "This is my first post",
-    userId : "1",
-    reactions : {
-      like : 0,
-      love : 0,
-      haha : 0,
-    },
-    tags : ["first", "post"],
-  },
-  {
-    id : "2",
-    title : "My second Post",
-    body : "This is my second post",
-    userId : "2",
-    reactions : {
-      like : 3,
-      love : 0,
-      angry : 0,
-      sad : 3,
-      haha : 0,
-    },
-    tags : ["enjoy", "moment"],
-  }
+ 
 ]
 
 export default PostListProvider;
