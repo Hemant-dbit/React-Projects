@@ -24,7 +24,9 @@ const reactions = [
 ];
 
 const Post = ({ post }) => {
-  const { deletePost } = useContext(PostList);
+  const { deletePost , updateReaction } = useContext(PostList);
+  
+
 
   return (
     <div className="card post-card" style={{ width: "25rem" }}>
@@ -41,6 +43,7 @@ const Post = ({ post }) => {
           <button
             key={reaction.type}
             className={`btn ${reaction.className} reactions-btn`}
+            onClick={() => updateReaction(post.id, reaction.type)}
           >
             {reaction.label}{" "}
             <span className={`badge ${reaction.badgeClass}`}>

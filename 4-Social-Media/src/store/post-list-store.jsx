@@ -4,6 +4,7 @@ export const PostList = createContext({
   postList: [],
   addpost: () => {},
   deletePost: () => {},
+  updateReaction: () => {},
 });
 
 const postListReducer = (currPostList, action) => {
@@ -12,6 +13,9 @@ const postListReducer = (currPostList, action) => {
     return [...currPostList, action.payload];
   }else if (action.type === "DELETE_POST") {
     const updatedPostList = currPostList.filter((post) => post.id !== action.payload);
+    return updatedPostList;
+  }else if (action.type === "UPDATE_POST") {
+    const updatedPostList = action.payload;
     return updatedPostList;
   }
   return currPostList;
@@ -42,8 +46,17 @@ const PostListProvider = ({ children }) => {
     dispatchPostList({ type: "DELETE_POST", payload: postId });
   }
 
+  const updateReaction = (postId, reactionType) => {
+    const postIndex = postList.findIndex((post) => post.id === postId);
+    const updatedPost = { ...postList[postIndex] };
+    updatedPost.reactions[reactionType]++;
+    const updatedPostList = [...postList];
+    updatedPostList[postIndex] = updatedPost;
+    dispatchPostList({ type: "UPDATE_POST", payload: updatedPostList });
+  }
+
   return(
-    <PostList.Provider value={{ postList, addPost, deletePost }}>
+    <PostList.Provider value={{ postList, addPost, deletePost , updateReaction }}>
       {children}
     </PostList.Provider>
   )
