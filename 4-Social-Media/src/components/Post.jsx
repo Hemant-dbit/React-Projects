@@ -1,27 +1,60 @@
+import React, { useContext } from "react";
+import { PostList } from "../store/post-list-store";
+
+
 const reactions = [
-  { type: "like", label: "👍 Like", class: "btn-outline-primary", badgeClass: "bg-primary" },
-  { type: "love", label: "❤️ Love", class: "btn-outline-danger", badgeClass: "bg-danger" },
-  { type: "haha", label: "😂 Haha", class: "btn-outline-warning", badgeClass: "bg-warning" }
+  {
+    type: "like",
+    label: "👍 Like",
+    className: "btn-outline-primary",
+    badgeClass: "bg-primary",
+  },
+  {
+    type: "love",
+    label: "❤️ Love",
+    className: "btn-outline-danger",
+    badgeClass: "bg-danger",
+  },
+  {
+    type: "haha",
+    label: "😂 Haha",
+    className: "btn-outline-warning",
+    badgeClass: "bg-warning",
+  },
 ];
 
 const Post = ({ post }) => {
+  const { deletePost } = useContext(PostList);
+
   return (
-    <div class="card post-card" style={{ width: "25rem" }}>
-      <div class="card-body ">
-        <h5 class="card-title">{post.title}</h5>
-        <p class="card-text">{post.body}</p>
+    <div className="card post-card" style={{ width: "25rem" }}>
+      <div className="card-body ">
+        <button
+          type="button"
+          className="btn-close position-absolute top-0 end-0 m-2 "
+          onClick={() => deletePost(post.id)}
+          aria-label="Close"
+        ></button>
+        <h5 className="card-title">{post.title}</h5>
+        <p className="card-text">{post.body}</p>
         {reactions.map((reaction) => (
-        <button key={reaction.type} className={`btn ${reaction.class} reactions-btn`}>
-          {reaction.label} <span className={`badge ${reaction.badgeClass}`}>{post.reactions[reaction.type]}</span>
-        </button>
-      ))}
-        <br/> 
+          <button
+            key={reaction.type}
+            className={`btn ${reaction.className} reactions-btn`}
+          >
+            {reaction.label}{" "}
+            <span className={`badge ${reaction.badgeClass}`}>
+              {post.reactions[reaction.type]}
+            </span>
+          </button>
+        ))}
+        <br />
         {post.tags.map((tag) => (
-          <span key={tag} class="badge bg-primary me-1">
+          <span key={tag} className="badge bg-primary me-1">
             {tag}
           </span>
-        ))}<br></br>
-        
+        ))}
+        <br></br>
       </div>
     </div>
   );
