@@ -9,6 +9,16 @@
 }
 
 .side-bar{
-  width : 250px;
+  width : 200px;
   min-height: 610px;
+}
+
+.post-card{
+  margin: 10px 10px;
+  border : black solid 1px;
+}
+
+.reactions-btn{
+  padding: 2px 2px;
+  margin: 2px 2px;
 }
