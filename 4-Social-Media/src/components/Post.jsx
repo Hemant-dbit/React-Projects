@@ -26,8 +26,6 @@ const reactions = [
 const Post = ({ post }) => {
   const { deletePost , updateReaction } = useContext(PostList);
   
-
-
   return (
     <div className="card post-card" style={{ width: "25rem" }}>
       <div className="card-body ">

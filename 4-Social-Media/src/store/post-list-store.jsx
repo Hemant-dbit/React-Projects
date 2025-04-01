@@ -27,7 +27,7 @@ const PostListProvider = ({ children }) => {
   const addPost = ({userId, postTitle, postBody, tags}) => {
     const postId = Math.random().toString(36).substring(2, 9);
     const newPost = {
-      id: postId,
+      id: userId + postId,
       title: postTitle,
       body: postBody,
       userId: userId,
