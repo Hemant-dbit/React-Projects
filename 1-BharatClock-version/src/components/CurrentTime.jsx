@@ -1,5 +1,16 @@
+import { useEffect ,useState } from "react";
+
 function CurrentTime() {
-  let time = new Date();
+ const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date()); // Update the time every second
+    }, 1000);
+
+    return () => clearInterval(interval); // Cleanup function to clear the interval
+  }, []);
+
 
   return (
     <div>

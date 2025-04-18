@@ -9,23 +9,29 @@ const PostList = () => {
 
   useEffect(() => {
     setFetching(true);
-    fetch("https://dummyjson.com/posts")
+
+    const controller = new AbortController();
+    const signal = controller.signal;
+    fetch("https://dummyjson.com/posts", { signal })
       .then((res) => res.json())
       .then((data) => {
         addInitialPosts(data.posts);
         setFetching(false);
       })
       .catch((err) => console.log(err));
-      
+
+    return () => {
+      console.log("Cleaning up...");
+      controller.abort(); // Abort the fetch request when the component unmounts
+    };
   }, []);
 
   return (
     <>
       {fetching && <Loading />}
       {!fetching && postList.length === 0 && <WelcomeMessage />}
-      {/* <div className="post-list-container"> */}
+
       {!fetching && postList.map((post) => <Post key={post.id} post={post} />)}
-      {/* </div> */}
     </>
   );
 };
