@@ -7,6 +7,7 @@ import Form from "./components/Form";
 import { useState } from "react";
 import PostList from "./components/PostList";
 import PostListProvider from "./store/post-list-store";
+import { Outlet } from "react-router-dom";
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
       </div>
       <div className="main-content">
         <Header></Header>
-        { selectedTab === "Home" ?  <PostList></PostList> :<Form></Form>}
+        {/* { selectedTab === "Home" ?  <PostList></PostList> :<Form></Form>} */}
+        <Outlet />
         
         <Footer></Footer>
       </div>
