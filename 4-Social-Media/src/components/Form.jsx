@@ -1,6 +1,7 @@
 import {  useRef } from "react";
 import { useContext } from "react";
 import { PostList } from "../store/post-list-store";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
   const { addPost } = useContext(PostList);
@@ -9,6 +10,8 @@ const Form = () => {
   const postTitleElement = useRef(null);
   const postBodyElement = useRef(null);
   const tagsElement = useRef(null);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,6 +26,8 @@ const Form = () => {
     postBodyElement.current.value = "";
     tagsElement.current.value = "";
     alert("Post created successfully!");
+
+    navigate("/");
 
   }
 
