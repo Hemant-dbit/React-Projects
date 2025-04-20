@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header.jsx";
-import Content from "./components/Content.jsx";
+import Content from "./components/DisplayCounter.jsx";
 import Modal from "./components/Modal.jsx";
 import Button from "./components/Button.jsx";
 function App() {
